@@ -1,2 +1,3 @@
 # nextjsbysample
-nextjsbysample
+## JSX
+## Props, State, Component

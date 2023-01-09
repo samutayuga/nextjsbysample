@@ -1,0 +1,67 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<tr>
+    <div id="app"></div>
+</tr>
+<tr>
+    <div id="claim"></div>
+</tr>
+
+<script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/jsx">
+
+    function HomePage(){
+        const allFruits=['jackfruit','durian','water melon']
+        const [likes,setLikes]=React.useState(0);
+
+        function handleClick(){
+            console.log("increment the like count")
+            setLikes(likes+1);
+        }
+        return (
+            <div>
+                <Header title="I do not really do React. But I can be reactive, 💙.
+                It is about component, props and state"/>
+                <ul>
+                    {allFruits.map((fruit)=>(
+                        <li>{fruit}</li>
+                    ))}
+                </ul>
+                <button onClick={handleClick}>Like({likes})</button>
+            </div>
+        )
+
+    }
+    //const app = document.getElementById("app")
+
+    function Header({title}) {
+        console.log(title)
+        return (
+            <h1>{title}</h1>
+        )
+    }
+
+    function Claim() {
+        return (
+
+            <h2>React is about DECLARATIVE rather than IMPERATIVE. 👌
+                <Header title="This is from claim 👌"/>
+            </h2>
+        )
+    }
+
+    const claim = document.getElementById("claim")
+    const homePage = document.getElementById("app")
+
+
+    ReactDOM.render(<Claim/>, claim)
+    ReactDOM.render(<HomePage/>, homePage)
+</script>
+</body>
+</html>
