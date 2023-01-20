@@ -1,0 +1,24 @@
+{
+  "colors": [
+    {
+      "name": "activate",
+      "color": "#6cff91"
+    },
+    {
+      "name": "failed",
+      "color": "#ad0c14"
+    },
+    {
+      "name": "pending",
+      "color": "#dbd218"
+    },
+    {
+      "name": "aborted",
+      "color": "#94938b"
+    },
+    {
+      "name": "terminated",
+      "color": "#94938b"
+    }
+  ]
+}

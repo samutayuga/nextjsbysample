@@ -21,8 +21,8 @@ app.prepare().then(() => {
 
                     if (pathname === '/a') {
                         await app.render(req, res, '/a', query)
-                    } else if (pathname === '/b') {
-                        await app.render(req, res, '/b', query)
+                    // } else if (pathname === '/b') {
+                    //     await app.render(req, res, '/b', query)
                     } else {
                         await handle(req, res, parsedUrl)
                     }

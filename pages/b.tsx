@@ -1,11 +1,12 @@
 import Stack from '@mui/material/Stack';
-import {Button, Container, Paper, styled} from '@mui/material';
+import {Box, Button, Container, Divider, Paper, styled} from '@mui/material';
 import {ThemeProvider} from "@mui/material/styles";
 import darkTheme from "../themes/dark";
 import CssBaseline from "@mui/material/CssBaseline";
 import fruites from "../config/fruits.json";
 import {IFruit} from "./index";
 import {json} from "stream/consumers";
+import SCardTitle from "../providers/STitle";
 
 export interface ISession {
     id: string
@@ -26,24 +27,37 @@ export default function Main({data}) {
         <ThemeProvider theme={darkTheme}>
             <CssBaseline/>
             <Container maxWidth="sm">
-                <Stack spacing={2}>
-                    {data.map((sess) => {
-                            console.log(sess)
-                        const sessData=JSON.parse(sess.sessionData)
+                {data.map((sess) => {
+                    console.log(sess)
+                    const sessData = JSON.parse(sess.sessionData)
 
-                            return (<Item key={sess.sessionId}>{sess.sessionId}/{sess.templateName}/{sess.createdBy}/{sessData.sessionName}</Item>)
-                        }
-                    )}
 
-                </Stack>
+                    return (
+                        <Box>
+                            <SCardTitle sId={sess.sessionId}/>
+                            <Stack spacing={2} key={sess.sessionId}>
+                                <Item>{sess.templateName}</Item>
+                            </Stack>
+                            <Stack spacing={2} key={sess.sessionId}>
+                                <Item>{sess.sessionState}</Item>
+                            </Stack>
+                            <Stack spacing={2} key={sess.sessionId}>
+                                <Item>{sess.createdBy}</Item>
+                            </Stack>
+                        </Box>
+                    )
+
+
+                })}
             </Container>
         </ThemeProvider>
     );
-};
-
-export async function getServerSideProps() {
-    const res = await fetch(`http://127.0.0.1:8888/session/list`)
-    const data = await res.json()
-
-    return {props: {data}}
 }
+    ;
+
+    export async function getServerSideProps() {
+        const res = await fetch(`http://127.0.0.1:8888/session/list`)
+        const data = await res.json()
+
+        return {props: {data}}
+    }

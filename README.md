@@ -5,6 +5,11 @@
 npm run dev
 ```
 
+## State Management
+
+`Powered by Zustand`
+
+
 
 ## JSX
 ## Props, State, Component
