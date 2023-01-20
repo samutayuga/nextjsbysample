@@ -29,9 +29,9 @@ export default function AddFruitArray() {
             <p>Add a new fruit</p>
             <input ref={inputRef}/>
             <button onClick={addFruit}>Add a Fruit</button>
-            {fruits.map((fruit) => {
+            {fruits.map((fruit) => (
                 <p key={fruit}>{fruit}</p>
-            })}
+            ))}
         </div>
     )
 }
