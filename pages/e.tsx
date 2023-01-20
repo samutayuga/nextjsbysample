@@ -1,7 +1,8 @@
 import {create} from "zustand";
 import {useRef} from "react";
+import {devtools, persist} from "zustand/middleware";
 
-const useStoreForArrray = create(set => ({
+let aStore = (set) => ({
     fruits: ['apple', 'banana', 'orange'],
     addFruits: (fruit) => {
         set(state => (
@@ -10,7 +11,12 @@ const useStoreForArrray = create(set => ({
             }
         ));
     }
-}));
+})
+
+//persist
+aStore = persist(aStore, {name: "basket"})
+aStore = devtools(aStore)
+const useStoreForArrray = create(aStore);
 
 
 export default function AddFruitArray() {
