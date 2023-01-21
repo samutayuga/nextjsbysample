@@ -1,11 +1,8 @@
 import Stack from '@mui/material/Stack';
-import {Box, Button, Container, Divider, Paper, styled} from '@mui/material';
+import {Box, Container, Paper, styled} from '@mui/material';
 import {ThemeProvider} from "@mui/material/styles";
 import darkTheme from "../themes/dark";
 import CssBaseline from "@mui/material/CssBaseline";
-import fruites from "../config/fruits.json";
-import {IFruit} from "./index";
-import {json} from "stream/consumers";
 import SCardTitle from "../providers/STitle";
 
 export interface ISession {

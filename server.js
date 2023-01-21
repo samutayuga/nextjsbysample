@@ -21,11 +21,13 @@ app.prepare().then(() => {
 
                     if (pathname === '/a') {
                         await app.render(req, res, '/a', query)
-                    // } else if (pathname === '/b') {
-                    //     await app.render(req, res, '/b', query)
+                        // } else if (pathname === '/b') {
+                        //     await app.render(req, res, '/b', query)
                     } else {
+                        console.log(`pathname: ${pathname} query: ${parsedUrl}`)
                         await handle(req, res, parsedUrl)
                     }
+
                 } catch (err) {
                     console.error('Error occurred handling', req.url, err)
                     res.statusCode = 500
