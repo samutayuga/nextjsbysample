@@ -28,7 +28,6 @@ const vaccineLiveResponse = {
 }
 //use zustand
 export const useCovidVaccinationStore = create<ITreatmentStore>((set) => ({
-    voting: vaccine_life_url,
     allTreatmentData: [],
     getResponse: async (vaccine_life_url) => {
         const resp = await fetch(vaccine_life_url, vaccineLiveResponse)
@@ -83,7 +82,7 @@ export default function GetVaccineLive() {
         <div>
             <h1>Size: {Alldata.length}</h1>
             <button onClick={() => {
-                getResponse('https://vaccovid-coronavirus-vaccine-and-treatment-tracker.p.rapidapi.com/api/npm-covid-data/')
+                getResponse(vaccine_life_url)
             }}>Fetch Data
             </button>
             <Grid container spacing={2} direction="row" justifyContent="flex-start" alignItems="flex-start">
