@@ -7,32 +7,61 @@ const requestHeaders: HeadersInit = new Headers();
 requestHeaders.set('X-RapidAPI-Key', api_key);
 requestHeaders.set('X-RapidAPI-Host', host)
 
+interface ITreatmentTracking {
+    id: string
+    country: string
+    activeCases: number
+    totalCases: number
+    totalTests: number
+    infectionRisk: number
+
+}
+
+interface ITreatmentStore {
+    allTreatmentData: ITreatmentTracking[]
+}
+
 const vaccineLiveResponse = {
     method: 'GET',
     headers: requestHeaders,
 }
 //use zustand
-const useAsyncStore = create((set) => ({
+export const useCovidVaccinationStore = create<ITreatmentStore>((set) => ({
     voting: vaccine_life_url,
-    Vaccinates: [],
+    allTreatmentData: [],
     getResponse: async (vaccine_life_url) => {
-        const resp = await fetch(vaccine_life_url,vaccineLiveResponse)
+        const resp = await fetch(vaccine_life_url, vaccineLiveResponse)
         const json = await resp.json()
-        set({Vaccinates: json})
+        set(state => ({
+            allTreatmentData: json.map((aTreat) => {
+                return {
+                    ...aTreat,
+                    id: aTreat.id,
+                    country: aTreat.Country,
+                    activeCases: aTreat.ActiveCases,
+                    totalCases: aTreat.TotalCases,
+                    totalTests: aTreat.TotalTests,
+                    infectionRisk: aTreat.Infection_Risk
+                }
+
+
+            })
+        }))
     },
 
 }))
 
 export default function GetVaccineLive() {
 
-    const getResponse = useAsyncStore(state => state.getResponse)
-    const Alldata = useAsyncStore(state => state.Vaccinates)
+    const getResponse = useCovidVaccinationStore(state => state.getResponse)
+    const Alldata = useCovidVaccinationStore(state => state.allTreatmentData)
     return (
         <div>
             <h1>Size: {Alldata.length}</h1>
             <ul>
                 {Alldata.map((aData) => {
-                    return <li key={aData.id}>{aData.Country} / {aData.ActiveCases} / {aData.TotalCases} / {aData.TotalTests} / {aData.Infection_Risk}</li>
+                    return <li
+                        key={aData.id}>{aData.country} / {aData.activeCases} / {aData.totalCases} / {aData.totalTests} / {aData.infectionRisk}</li>
                 })}
             </ul>
 
