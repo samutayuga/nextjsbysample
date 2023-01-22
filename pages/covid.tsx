@@ -1,4 +1,6 @@
 import {create} from "zustand";
+import {Box, Card, CardContent, CardHeader, Container, Grid, Paper, styled, Typography} from "@mui/material";
+import Stack from "@mui/material/Stack";
 
 const vaccine_life_url = 'https://vaccovid-coronavirus-vaccine-and-treatment-tracker.p.rapidapi.com/api/npm-covid-data/'
 const api_key = 'fe090460camsh6e6ebf6c31d6427p1d1fd7jsn3f4a011f95c5'
@@ -43,14 +45,43 @@ export const useCovidVaccinationStore = create<ITreatmentStore>((set) => ({
                     totalTests: aTreat.TotalTests,
                     infectionRisk: aTreat.Infection_Risk
                 }
-
-
             })
         }))
     },
 
 }))
+const Item = styled(Paper)(({theme}) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'left',
+    color: theme.palette.text.secondary,
+}));
 
+function BasicCard({content}){
+    return (
+        <Grid item xs={12} sm={6} md={3} key={content.id}>
+            <Card key={content.id} sx={{ minWidth: 275 }}>
+                <CardHeader
+                    title={`${content.country}`}
+                />
+                <CardContent>
+                    <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom>
+                        {content.activeCases}
+                    </Typography>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                        {content.totalCases}
+                    </Typography>
+                    <Typography variant="body2">
+                        {content.infectionRisk}
+                    </Typography>
+                </CardContent>
+            </Card>
+        </Grid>
+
+    )
+
+}
 export default function GetVaccineLive() {
 
     const getResponse = useCovidVaccinationStore(state => state.getResponse)
@@ -58,17 +89,17 @@ export default function GetVaccineLive() {
     return (
         <div>
             <h1>Size: {Alldata.length}</h1>
-            <ul>
-                {Alldata.map((aData) => {
-                    return <li
-                        key={aData.id}>{aData.country} / {aData.activeCases} / {aData.totalCases} / {aData.totalTests} / {aData.infectionRisk}</li>
-                })}
-            </ul>
-
             <button onClick={() => {
                 getResponse('https://vaccovid-coronavirus-vaccine-and-treatment-tracker.p.rapidapi.com/api/npm-covid-data/')
             }}>Fetch Data
             </button>
+            <Grid container spacing={2} direction="row" justifyContent="flex-start" alignItems="flex-start">
+                {Alldata.map((aData) => {
+                    return (
+                        <BasicCard content={aData}/>
+                    )
+                })}
+            </Grid>
         </div>
     );
 
