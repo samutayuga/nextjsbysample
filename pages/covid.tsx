@@ -49,26 +49,19 @@ export const useCovidVaccinationStore = create<ITreatmentStore>((set) => ({
     },
 
 }))
-const Item = styled(Paper)(({theme}) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'left',
-    color: theme.palette.text.secondary,
-}));
 
-function BasicCard({content}){
+function BasicCard({content}) {
     return (
         <Grid item xs={12} sm={6} md={3} key={content.id}>
-            <Card key={content.id} sx={{ minWidth: 275 }}>
+            <Card key={content.id} sx={{minWidth: 275}}>
                 <CardHeader
                     title={`${content.country}`}
                 />
                 <CardContent>
-                    <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom>
+                    <Typography sx={{fontSize: 16}} color="text.secondary" gutterBottom>
                         {content.activeCases}
                     </Typography>
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                    <Typography sx={{mb: 1.5}} color="text.secondary">
                         {content.totalCases}
                     </Typography>
                     <Typography variant="body2">
@@ -81,6 +74,7 @@ function BasicCard({content}){
     )
 
 }
+
 export default function GetVaccineLive() {
 
     const getResponse = useCovidVaccinationStore(state => state.getResponse)
