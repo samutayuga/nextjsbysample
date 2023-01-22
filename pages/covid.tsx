@@ -1,6 +1,5 @@
 import {create} from "zustand";
-import {Box, Card, CardContent, CardHeader, Container, Grid, Paper, styled, Typography} from "@mui/material";
-import Stack from "@mui/material/Stack";
+import {Card, CardContent, CardHeader, Grid, Paper, styled, Typography} from "@mui/material";
 
 const vaccine_life_url = 'https://vaccovid-coronavirus-vaccine-and-treatment-tracker.p.rapidapi.com/api/npm-covid-data/'
 const api_key = 'fe090460camsh6e6ebf6c31d6427p1d1fd7jsn3f4a011f95c5'
