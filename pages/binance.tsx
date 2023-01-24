@@ -18,7 +18,7 @@ import React from "react";
 import {Label} from "@mui/icons-material";
 import {DialogBody} from "next/dist/client/components/react-dev-overlay/internal/components/Dialog";
 
-const url_24hr_endpoint = 'https://binance43.p.rapidapi.com/ticker/24hr'
+export const url_24hr_endpoint = 'https://binance43.p.rapidapi.com/ticker/24hr'
 const api_key = 'fe090460camsh6e6ebf6c31d6427p1d1fd7jsn3f4a011f95c5'
 const host = 'binance43.p.rapidapi.com'
 const requestHeaders: HeadersInit = new Headers();
@@ -66,7 +66,7 @@ const styles = {
         textAlign: 'initial'
     }
 }
-const useTicker24Hr = create<ITradingStore & ITradable>((set, get) => ({ //data
+export const useTicker24Hr = create<ITradingStore & ITradable>((set, get) => ({ //data
     all24HrData: [],
     tradingBySymbol: Map(),
     retrieve24HrData: async (url_24_hrs) => {
