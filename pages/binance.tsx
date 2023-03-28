@@ -118,18 +118,21 @@ export interface SimpleDialogProps {
     open: boolean;
     selectedValue: ITrading;
     onClose: (value: boolean) => void;
+    setOpen: Function
 }
 
 function SimpleDialog(props: SimpleDialogProps) {
-    const {onClose, selectedValue, open} = props;
+    const {onClose, setOpen, selectedValue, open} = props;
 
     const handleClose = () => {
-        onClose(false);
+        console.log("clicked")
+        setOpen(false);
     };
 
     const handleListItemClick = (value: ITrading) => {
         onClose(true);
     };
+    console.log(`dialog state is: ${open}`)
 
     return (
         <Dialog open={open}>
@@ -201,6 +204,7 @@ function BinanceTrading({content}) {
                         selectedValue={content}
                         open={open}
                         onClose={handleClose}
+                        setOpen={setOpen}
                     />
                 </CardActionArea>
             </Card>

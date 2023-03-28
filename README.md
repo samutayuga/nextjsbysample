@@ -25,3 +25,9 @@ npm run dev
 ## Custom Server
 ## Custom Application
 ## Typescript
+
+## Issues
+
+`Hydration failed because the initial UI does not match what was rendered on the server`
+
+
